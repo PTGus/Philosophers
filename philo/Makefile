@@ -6,7 +6,7 @@
 #    By: gumendes <gumendes@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/27 12:10:21 by gumendes          #+#    #+#              #
-#    Updated: 2025/03/10 15:01:06 by gumendes         ###   ########.fr        #
+#    Updated: 2025/03/12 16:05:09 by gumendes         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@
 CC			=	cc
 RM			=	rm -rf
 CFLAGS		=	-Wall -Wextra -Werror -pthread -g
-LEAK		=	-fsanitize=leak
+LEAK		=	-fsanitize=thread
 
 #==============================================================================#
 #                                  PATHS       					               #
@@ -42,7 +42,8 @@ NAME		=	philo
 #                                  SOURCE AND OBJECT FILES                     #
 #==============================================================================#
 
-SRC			=	$(SRC_PATH)/errors.c $(SRC_PATH)/init.c $(SRC_PATH)/main.c $(SRC_PATH)/parsing.c $(SRC_PATH)/routine.c $(SRC_PATH)/utils.c
+SRC			=	$(SRC_PATH)/actions.c $(SRC_PATH)/errors.c $(SRC_PATH)/init.c $(SRC_PATH)/main.c $(SRC_PATH)/parsing.c $(SRC_PATH)/routine.c \
+				$(SRC_PATH)/time.c $(SRC_PATH)/utils.c
 OBJ         =   $(SRC:$(SRC_PATH)/%.c=$(BUILD_PATH)/%.o)
 
 #==============================================================================#

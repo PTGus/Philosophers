@@ -6,7 +6,7 @@
 /*   By: gumendes <gumendes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 15:15:31 by gumendes          #+#    #+#             */
-/*   Updated: 2025/03/06 14:16:24 by gumendes         ###   ########.fr       */
+/*   Updated: 2025/03/11 11:16:17 by gumendes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,11 @@ int	parser(int ac, char **av)
 		return (printf("Invalid number of arguments!\n"));
 	if (validator(av) == 1)
 		parsing_err();
-	if (ft_atol(av[2]) < INT_MIN || ft_atol(av[3]) < INT_MIN || ft_atol(av[4]) < INT_MIN)
+	if (ft_atol(av[2]) < INT_MIN || ft_atol(av[3]) < INT_MIN
+		|| ft_atol(av[4]) < INT_MIN)
 		parsing_err();
-	if (ft_atol(av[2]) > INT_MAX || ft_atol(av[3]) > INT_MAX || ft_atol(av[4]) > INT_MAX)
+	if (ft_atol(av[2]) > INT_MAX || ft_atol(av[3]) > INT_MAX
+		|| ft_atol(av[4]) > INT_MAX)
 		parsing_err();
 	if (ft_atol(av[1]) > 200)
 		parsing_err();

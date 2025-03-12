@@ -6,12 +6,16 @@
 /*   By: gumendes <gumendes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 15:26:34 by gumendes          #+#    #+#             */
-/*   Updated: 2025/03/10 14:55:07 by gumendes         ###   ########.fr       */
+/*   Updated: 2025/03/11 11:44:02 by gumendes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philos.h"
 
+/**
+ * @brief Converts ascii characters into their long counterpart.
+ * @return The converted number a long.
+ */
 long	ft_atol(const char *str)
 {
 	long	idx;
@@ -37,6 +41,10 @@ long	ft_atol(const char *str)
 	return (sign * sum);
 }
 
+/**
+ * @brief Converts ascii characters into their integer counterpart.
+ * @return The converted number as an int.
+ */
 int	ft_atoi(const char *str)
 {
 	int	idx;
