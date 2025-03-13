@@ -6,7 +6,7 @@
 /*   By: gumendes <gumendes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 10:58:13 by gumendes          #+#    #+#             */
-/*   Updated: 2025/03/13 11:09:05 by gumendes         ###   ########.fr       */
+/*   Updated: 2025/03/13 13:31:27 by gumendes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,11 @@ void	init_forks(t_data *data)
 	while (++i < data->philo_amount)
 		pthread_mutex_init(&data->forks[i], NULL);
 	data->philos[0].right_fork = &data->forks[0];
+	if (data->philo_amount == 1)
+    {
+        data->philos[0].left_fork = NULL;
+        return ;
+    }
 	if (data->philo_amount == 1)
 		return ;
 	data->philos[0].left_fork = &data->forks[data->philo_amount - 1];
@@ -115,6 +120,10 @@ int	init_data(t_data *data, char **av)
 	if (mallocinator(data, data->philo_amount) != 0)
 		return (1);
 	if (pthread_mutex_init(data->forks, NULL) != 0)
+		return (2);
+	if (pthread_mutex_init(&data->print, NULL) != 0)
+		return (2);
+	if (pthread_mutex_init(&data->start, NULL) != 0)
 		return (2);
 	return (0);
 }
