@@ -6,7 +6,7 @@
 /*   By: gumendes <gumendes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:28:06 by gumendes          #+#    #+#             */
-/*   Updated: 2025/03/12 17:05:51 by gumendes         ###   ########.fr       */
+/*   Updated: 2025/03/13 10:43:12 by gumendes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	print_message(t_philos *philos, char *message)
 
 	pthread_mutex_lock(&philos->data->print);
 	time = ft_get_time() - philos->data->start_time;
-	printf("[%lu] %i %s\n", time, philos->id, message);
+	printf("%lu %i %s\n", time, philos->id, message);
 	pthread_mutex_unlock(&philos->data->print);
 }
 

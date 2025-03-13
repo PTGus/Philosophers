@@ -6,7 +6,7 @@
 /*   By: gumendes <gumendes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 15:39:55 by gumendes          #+#    #+#             */
-/*   Updated: 2025/03/12 17:05:16 by gumendes         ###   ########.fr       */
+/*   Updated: 2025/03/13 10:42:48 by gumendes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,13 @@ void	*routine(void *info)
 	pthread_mutex_lock(&philos->data->start);
 	pthread_mutex_unlock(&philos->data->start);
 	philos->last_eat_time = philos->data->start_time;
-	while (i != philos->data->eat_amount)
+	while (1)
 	{
 		if (philos->data->status == DEAD)
 			break ;
 		eat(philos);
+		if (philos->meals_eaten == philos->data->eat_amount)
+			break ;
 		ft_sleep(philos);
 		think(philos);
 		i++;

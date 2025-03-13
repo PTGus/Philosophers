@@ -6,7 +6,7 @@
 /*   By: gumendes <gumendes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 10:58:13 by gumendes          #+#    #+#             */
-/*   Updated: 2025/03/12 16:44:00 by gumendes         ###   ########.fr       */
+/*   Updated: 2025/03/13 11:09:05 by gumendes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,8 +136,7 @@ int	create_threads(t_data *data)
 	}
 	data->start_time = ft_get_time();
 	pthread_mutex_unlock(&data->start);
-	if (data->to_eat > 10)
-		ft_usleep(data->to_eat - 10);
+	ft_usleep(data->to_eat - 10);
 	monitor(data);
 	i = -1;
 	while (++i < data->philo_amount)

@@ -1,31 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   cleanup.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gumendes <gumendes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/27 12:15:26 by gumendes          #+#    #+#             */
-/*   Updated: 2025/03/13 11:30:47 by gumendes         ###   ########.fr       */
+/*   Created: 2025/03/13 11:15:22 by gumendes          #+#    #+#             */
+/*   Updated: 2025/03/13 11:31:40 by gumendes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philos.h"
 
-int	main(int ac, char **av)
+void	free_all(t_data *data)
 {
-	t_data	*data;
+	int	i;
 
-	if (parser(ac, av) != 0)
-		return (1);
-	data = malloc(sizeof(t_data));
-	if (!data)
-		return (1);
-	if (init_data(data, av) != 0)
-		return (1);
-	init_philos(data);
-	init_forks(data);
-	create_threads(data);
-	free_all(data);
-	return (0);
+	// Destroy all fork mutexes
+	i = -1;
+	while (++i < data->philo_amount)
+		pthread_mutex_destroy(&data->forks[i]);
+
+	// Destroy individual mutexes
+	pthread_mutex_destroy(&data->print);
+	pthread_mutex_destroy(&data->start);
+
+	// Free allocated memory
+	free(data->thread_ph);
+	free(data->philos);
+	free(data->forks);
 }

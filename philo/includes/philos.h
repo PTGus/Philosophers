@@ -6,7 +6,7 @@
 /*   By: gumendes <gumendes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 12:19:30 by gumendes          #+#    #+#             */
-/*   Updated: 2025/03/12 16:14:40 by gumendes         ###   ########.fr       */
+/*   Updated: 2025/03/13 11:24:58 by gumendes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,9 @@ void	eat(t_philos *philos);
 void	ft_sleep(t_philos *philos);
 void	think(t_philos *philos);
 void	died(t_philos *philos);
+
+// cleanup //
+void	free_all(t_data *data);
 
 // errors //
 void	parsing_err(void);
