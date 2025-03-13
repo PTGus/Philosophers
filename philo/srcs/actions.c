@@ -6,7 +6,7 @@
 /*   By: gumendes <gumendes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:28:06 by gumendes          #+#    #+#             */
-/*   Updated: 2025/03/13 14:30:56 by gumendes         ###   ########.fr       */
+/*   Updated: 2025/03/13 16:22:02 by gumendes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,21 @@ void	print_message(t_philos *philos, char *message)
 	pthread_mutex_unlock(&philos->data->print);
 }
 
-void eat(t_philos *philos)
+void	eat(t_philos *philos)
 {
 	if (philos->data->status == DEAD)
 		return ;
-	pthread_mutex_lock(philos->left_fork);
 	pthread_mutex_lock(philos->right_fork);
+	pthread_mutex_lock(philos->left_fork);
 	print_message(philos, FORK);
 	print_message(philos, FORK);
-	print_message(philos, EATING);
 	philos->last_eat_time = ft_get_time();
-	philos->meals_eaten += 1;
+	print_message(philos, EATING);
 	ft_usleep(philos->data->to_eat);
-	pthread_mutex_unlock(philos->right_fork);
+	if (philos->meals_eaten < philos->data->eat_amount)
+		philos->meals_eaten++;
 	pthread_mutex_unlock(philos->left_fork);
+	pthread_mutex_unlock(philos->right_fork);
 }
 
 void	ft_sleep(t_philos *philos)

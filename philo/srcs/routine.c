@@ -6,7 +6,7 @@
 /*   By: gumendes <gumendes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 15:39:55 by gumendes          #+#    #+#             */
-/*   Updated: 2025/03/13 14:55:41 by gumendes         ###   ########.fr       */
+/*   Updated: 2025/03/13 16:15:38 by gumendes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,25 @@
 
 void	*routine(void *info)
 {
-	t_philos	*philo;
+	t_philos	*philos;
+	size_t		time;
 
-	philo = (t_philos *)info;
-	pthread_mutex_lock(&philo->data->start);
-	pthread_mutex_unlock(&philo->data->start);
-	philo->last_eat_time = philo->data->start_time;
-	if (philo->data->philo_amount == 1)
+	time = 0;
+	philos = (t_philos *)info;
+	pthread_mutex_lock(&philos->data->start);
+	pthread_mutex_unlock(&philos->data->start);
+	philos->last_eat_time = philos->data->start_time;
+	if (philos->data->philo_amount == 1)
 	{
-		print_message(philo, FORK);
-		ft_usleep(philo->data->to_die);
+		print_message(philos, FORK);
+		ft_usleep(philos->data->to_die);
 		return (NULL);
 	}
-	if (philo->id % 2 != 0)
+	while (philos->data->status == ALIVE)
 	{
-		print_message(philo, THINKING);
-		ft_usleep(philo->data->to_eat);
-	}
-	while (philo->data->status == ALIVE)
-	{
-		eat(philo);
-		ft_sleep(philo);
-		print_message(philo, THINKING);
+		eat(philos);
+		ft_sleep(philos);
+		think(philos);
 	}
 	return (NULL);
 }
@@ -48,6 +45,7 @@ int	status_checker(t_philos *philo)
 	if (ft_get_time() - philo->last_eat_time > (size_t)philo->data->to_die)
 	{
 		philo->data->status = DEAD;
+		philo->philo_stats = DEAD;
 		return (DEAD);
 	}
 	else if (philo->meals_eaten == philo->data->eat_amount && \
@@ -70,6 +68,8 @@ void	monitor(t_data *data)
 	while (42)
 	{
 		if (status_checker(&data->philos[i]) != ALIVE)
+			break ;
+		if (data->status == FULL)
 			break ;
 		i++;
 		if (i == data->philo_amount)
