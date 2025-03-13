@@ -6,7 +6,7 @@
 #    By: gumendes <gumendes@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/27 12:10:21 by gumendes          #+#    #+#              #
-#    Updated: 2025/03/13 11:32:09 by gumendes         ###   ########.fr        #
+#    Updated: 2025/03/13 16:29:18 by gumendes         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@
 CC			=	cc
 RM			=	rm -rf
 CFLAGS		=	-Wall -Wextra -Werror -pthread -g
-LEAK		=	-fsanitize=leak
+LEAK		=	-fsanitize=thread
 
 #==============================================================================#
 #                                  PATHS       					               #

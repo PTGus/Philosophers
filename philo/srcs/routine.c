@@ -6,7 +6,7 @@
 /*   By: gumendes <gumendes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 15:39:55 by gumendes          #+#    #+#             */
-/*   Updated: 2025/03/13 16:15:38 by gumendes         ###   ########.fr       */
+/*   Updated: 2025/03/13 16:48:24 by gumendes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,7 @@
 void	*routine(void *info)
 {
 	t_philos	*philos;
-	size_t		time;
 
-	time = 0;
 	philos = (t_philos *)info;
 	pthread_mutex_lock(&philos->data->start);
 	pthread_mutex_unlock(&philos->data->start);
@@ -27,6 +25,11 @@ void	*routine(void *info)
 		print_message(philos, FORK);
 		ft_usleep(philos->data->to_die);
 		return (NULL);
+	}
+	if (philos->id % 2 != 0)
+	{
+		print_message(philos, THINKING);
+		ft_usleep(philos->data->to_eat);
 	}
 	while (philos->data->status == ALIVE)
 	{
@@ -76,5 +79,9 @@ void	monitor(t_data *data)
 			i = 0;
 	}
 	if (data->status == DEAD)
+	{
 		print_message(&data->philos[i], DIED);
+		free_all(data);
+		exit (0);
+	}
 }

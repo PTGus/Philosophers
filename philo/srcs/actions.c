@@ -6,7 +6,7 @@
 /*   By: gumendes <gumendes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:28:06 by gumendes          #+#    #+#             */
-/*   Updated: 2025/03/13 16:22:02 by gumendes         ###   ########.fr       */
+/*   Updated: 2025/03/13 16:43:37 by gumendes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ void	eat(t_philos *philos)
 {
 	if (philos->data->status == DEAD)
 		return ;
+	if (philos->meals_eaten == philos->data->eat_amount)
+		return ;
 	pthread_mutex_lock(philos->right_fork);
 	pthread_mutex_lock(philos->left_fork);
 	print_message(philos, FORK);
@@ -33,7 +35,7 @@ void	eat(t_philos *philos)
 	philos->last_eat_time = ft_get_time();
 	print_message(philos, EATING);
 	ft_usleep(philos->data->to_eat);
-	if (philos->meals_eaten < philos->data->eat_amount)
+	if (philos->meals_eaten != philos->data->eat_amount)
 		philos->meals_eaten++;
 	pthread_mutex_unlock(philos->left_fork);
 	pthread_mutex_unlock(philos->right_fork);
@@ -43,6 +45,8 @@ void	ft_sleep(t_philos *philos)
 {
 	if (philos->data->status == DEAD)
 		return ;
+	else if (philos->meals_eaten == philos->data->eat_amount)
+		return ;
 	print_message(philos, SLEEPING);
 	ft_usleep(philos->data->to_sleep);
 }
@@ -50,6 +54,8 @@ void	ft_sleep(t_philos *philos)
 void	think(t_philos *philos)
 {
 	if (philos->data->status == DEAD)
+		return ;
+	else if (philos->meals_eaten == philos->data->eat_amount)
 		return ;
 	print_message(philos, THINKING);
 }
