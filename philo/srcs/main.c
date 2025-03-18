@@ -6,7 +6,7 @@
 /*   By: gumendes <gumendes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 12:15:26 by gumendes          #+#    #+#             */
-/*   Updated: 2025/03/13 11:30:47 by gumendes         ###   ########.fr       */
+/*   Updated: 2025/03/17 14:26:08 by gumendes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,19 @@ int	main(int ac, char **av)
 	if (!data)
 		return (1);
 	if (init_data(data, av) != 0)
+	{
+		free(data);
 		return (1);
+	}
 	init_philos(data);
 	init_forks(data);
-	create_threads(data);
+	if (create_threads(data) != 0)
+	{
+		free_all(data);
+		free(data);
+		return (1);
+	}
 	free_all(data);
+	free(data);
 	return (0);
 }

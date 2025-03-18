@@ -6,7 +6,7 @@
 /*   By: gumendes <gumendes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 12:19:30 by gumendes          #+#    #+#             */
-/*   Updated: 2025/03/13 11:24:58 by gumendes         ###   ########.fr       */
+/*   Updated: 2025/03/17 14:26:08 by gumendes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,6 @@ void	free_all(t_data *data);
 void	parsing_err(void);
 void	init_err(void);
 void	malloc_err(void);
-void	ft_error(int err_num);
 
 // init //
 int		mallocinator(t_data *data, int philo_ammount);

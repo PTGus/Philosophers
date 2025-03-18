@@ -6,7 +6,7 @@
 /*   By: gumendes <gumendes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 10:58:13 by gumendes          #+#    #+#             */
-/*   Updated: 2025/03/13 15:57:35 by gumendes         ###   ########.fr       */
+/*   Updated: 2025/03/18 16:16:02 by gumendes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ int	init_data(t_data *data, char **av)
 	data->start_time = ft_get_time();
 	if (mallocinator(data, data->philo_amount) != 0)
 		return (1);
-	if (pthread_mutex_init(data->forks, NULL) != 0)
+	if (pthread_mutex_init(&data->print, NULL) != 0)
 		return (2);
 	return (0);
 }
@@ -136,7 +136,7 @@ int	create_threads(t_data *data)
 	}
 	data->start_time = ft_get_time();
 	pthread_mutex_unlock(&data->start);
-	ft_usleep(data->to_eat - 10);
+	ft_usleep(data->to_die - 10);
 	monitor(data);
 	i = -1;
 	while (++i < data->philo_amount)

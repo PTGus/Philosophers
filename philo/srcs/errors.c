@@ -6,7 +6,7 @@
 /*   By: gumendes <gumendes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 10:11:12 by gumendes          #+#    #+#             */
-/*   Updated: 2025/03/10 15:24:24 by gumendes         ###   ########.fr       */
+/*   Updated: 2025/03/17 14:26:08 by gumendes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,4 @@ void	malloc_err(void)
 {
 	printf("Error allocating memory.\n");
 	exit (1);
-}
-
-void	ft_error(int err_num)
-{
-	if (err_num == 0)
-		parsing_err();
-	if (err_num == 1)
-		init_err();
-	if (err_num == 1)
-		malloc_err();
 }
