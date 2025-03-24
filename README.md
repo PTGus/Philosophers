@@ -1,5 +1,5 @@
 42 Project : philosophers
-# <h1 align="center">philosophers</h1>
+# <h1 align="center">Philosophers</h1>
 
 # About
 The Dining Philosophers Problem is a classic synchronization problem in computer science that demonstrates issues related to process synchronization, resource sharing, and deadlock prevention.
