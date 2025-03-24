@@ -6,12 +6,15 @@
 /*   By: gumendes <gumendes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 11:15:22 by gumendes          #+#    #+#             */
-/*   Updated: 2025/03/18 12:17:45 by gumendes         ###   ########.fr       */
+/*   Updated: 2025/03/24 10:16:55 by gumendes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philos.h"
 
+/**
+ * @brief Destroys the mutexes and frees all allocated memmory.
+ */
 void	free_all(t_data *data)
 {
 	int	i;

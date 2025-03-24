@@ -6,12 +6,16 @@
 /*   By: gumendes <gumendes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 15:39:55 by gumendes          #+#    #+#             */
-/*   Updated: 2025/03/18 14:25:46 by gumendes         ###   ########.fr       */
+/*   Updated: 2025/03/24 12:25:22 by gumendes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philos.h"
 
+/**
+ * @brief The routine in which the philosophers will
+ *  eat, sleep and think untill the simmulation ends.
+ */
 void	*routine(void *data)
 {
 	t_philos	*philo;
@@ -40,28 +44,42 @@ void	*routine(void *data)
 	return (NULL);
 }
 
+/**
+ * @brief Checks whether a philosophers time after the last meal
+ *  exceeds the time to die, if the philosopher is full and if all
+ *  the philosophers are full.
+ */
 int	status_checker(t_philos *philo)
 {
 	int	i;
 
 	i = 0;
-	if (ft_get_time() - philo->last_eat_time > (size_t)philo->data->to_die)
+	if (philo->philo_stats != FULL)
 	{
-		philo->data->status = DEAD;
-		return (DEAD);
+		if (ft_get_time() - philo->last_eat_time > (size_t)philo->data->to_die)
+		{
+			philo->data->status = DEAD;
+			return (DEAD);
+		}
+		else if (philo->meals_eaten == philo->data->eat_amount && \
+			philo->philo_stats == ALIVE)
+		{
+			philo->data->philos_full++;
+			philo->philo_stats = FULL;
+		}
+		if (philo->data->philos_full == philo->data->philo_amount)
+			philo->data->status = FULL;
+		i = philo->data->status;
 	}
-	else if (philo->meals_eaten == philo->data->eat_amount && \
-	philo->philo_stats == ALIVE)
-	{
-		philo->data->philos_full++;
-		philo->philo_stats = FULL;
-	}
-	if (philo->data->philos_full == philo->data->philo_amount)
-		philo->data->status = FULL;
-	i = philo->data->status;
+	else
+		return (i);
 	return (i);
 }
 
+/**
+ * @brief Iterates through all the philosophers
+ *  and checks the simmulations status.
+ */
 void	monitor(t_data *data)
 {
 	int		i;

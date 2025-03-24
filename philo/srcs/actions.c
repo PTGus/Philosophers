@@ -6,12 +6,16 @@
 /*   By: gumendes <gumendes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:28:06 by gumendes          #+#    #+#             */
-/*   Updated: 2025/03/18 16:31:22 by gumendes         ###   ########.fr       */
+/*   Updated: 2025/03/24 11:27:26 by gumendes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philos.h"
 
+/**
+ * @brief Locks the mutexes in order for the threads to not
+ *  cause race conditions in the printf buffer and prints a message.
+ */
 void	print_message(t_philos *philos, char *message)
 {
 	size_t	time;
@@ -22,14 +26,15 @@ void	print_message(t_philos *philos, char *message)
 	pthread_mutex_unlock(&philos->data->print);
 }
 
+/**
+ * @brief Locks the required forks, prints the required messages
+ *  and makes the thread wait while the time to eat doesn't end.
+ */
 void	eat(t_philos *philos)
 {
-	if (philos->data->philo_amount == 1)
-	{
-		print_message(philos, FORK);
-		ft_usleep(philos->data->to_die + 1);
+	if (philos->data->status != ALIVE || philos->philo_stats != ALIVE
+		|| philos->meals_eaten == philos->data->eat_amount)
 		return ;
-	}
 	pthread_mutex_lock(philos->right_fork);
 	pthread_mutex_lock(philos->left_fork);
 	if (philos->data->status != ALIVE || philos->philo_stats != ALIVE
@@ -51,6 +56,9 @@ void	eat(t_philos *philos)
 	return ;
 }
 
+/**
+ * @brief Prints the sleep message and puts the philosopher to "sleep".
+ */
 void	ft_sleep(t_philos *philos)
 {
 	if (philos->data->status == DEAD || philos->data->status == FULL)
@@ -61,6 +69,9 @@ void	ft_sleep(t_philos *philos)
 	ft_usleep(philos->data->to_sleep);
 }
 
+/**
+ * @brief Prints the think message.
+ */
 void	think(t_philos *philos)
 {
 	if (philos->data->status == DEAD || philos->data->status == FULL)
@@ -70,6 +81,9 @@ void	think(t_philos *philos)
 	print_message(philos, THINKING);
 }
 
+/**
+ * @brief Prints the dead message.
+ */
 void	died(t_philos *philos)
 {
 	print_message(philos, DIED);

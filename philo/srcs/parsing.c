@@ -6,12 +6,16 @@
 /*   By: gumendes <gumendes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 15:15:31 by gumendes          #+#    #+#             */
-/*   Updated: 2025/03/11 11:16:17 by gumendes         ###   ########.fr       */
+/*   Updated: 2025/03/24 10:24:39 by gumendes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philos.h"
 
+/**
+ * @brief Checks whether or not any of the provided
+ *  arguments have any invalid characters.
+ */
 int	validator(char **args)
 {
 	int	i;
@@ -32,6 +36,9 @@ int	validator(char **args)
 	return (0);
 }
 
+/**
+ * @brief Checks whether the arguments are whitin the expected ranges.
+ */
 int	parser(int ac, char **av)
 {
 	if (ac < 5 || ac > 6)
