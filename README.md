@@ -2,7 +2,7 @@
 # <h1 align="center">Philosophers</h1>
 
 # About
-The Dining Philosophers Problem is a classic synchronization problem in computer science that demonstrates issues related to process synchronization, resource sharing, and deadlock prevention.
+The [Dining Philosophers Problem]([https://42.fr/en/homepage/](https://www.mathworks.com/help/simevents/ug/dining-philosophers-problem.html)) is a classic synchronization problem in computer science that demonstrates issues related to process synchronization, resource sharing, and deadlock prevention.
 
 # The Problem
 Imagine one or more philosophers sitting at a round table. In front of each philosopher is a plate of food, and between every pair of philosophers is a single fork. To eat, a philosopher needs to pick up two forks (the one on their left and the one on their right).  
