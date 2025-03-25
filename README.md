@@ -12,7 +12,7 @@ Imagine one or more philosophers sitting at a round table. In front of each phil
 # Challenges
 • Resource Sharing: Only one philosopher can use a fork at a time.  
 • Deadlock Risk: If each philosopher picks up the fork on their left at the same time, they will all wait  
-&nbsp;&nbsp;indefinitely for the fork on their right, causing a deadlock.  
+&nbsp;&nbsp;&nbsp;indefinitely for the fork on their right, causing a deadlock.  
 • Starvation: Some philosophers may keep eating while others never get a chance, leading to starvation.  
 
 # Purpose
