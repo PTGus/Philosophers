@@ -6,8 +6,8 @@ The Dining Philosophers Problem is a classic synchronization problem in computer
 
 # The Problem
 Imagine one or more philosophers sitting at a round table. In front of each philosopher is a plate of food, and between every pair of philosophers is a single fork. To eat, a philosopher needs to pick up two forks (the one on their left and the one on their right).  
->• The philosophers alternate between eating, thinking, or sleeping:  
->>○ While performing an action the philosophers can not perform any other action.  
+-• The philosophers alternate between eating, thinking, or sleeping:  
+ -○ While performing an action the philosophers can not perform any other action.  
 
 # Challenges
 >• Resource Sharing: Only one philosopher can use a fork at a time.  
