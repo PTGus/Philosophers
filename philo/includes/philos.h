@@ -6,7 +6,7 @@
 /*   By: gumendes <gumendes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 12:19:30 by gumendes          #+#    #+#             */
-/*   Updated: 2025/03/17 14:26:08 by gumendes         ###   ########.fr       */
+/*   Updated: 2025/03/25 14:16:40 by gumendes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,12 +119,13 @@ void	*routine(void *info);
 int		status_checker(t_philos *philo);
 void	monitor(t_data *data);
 
-// utils //
-long	ft_atol(const char *str);
-int		ft_atoi(const char *str);
-
 // time //
 size_t	ft_get_time(void);
 void	ft_usleep(size_t sleeptime);
+
+// utils //
+long	ft_atol(const char *str);
+int		ft_atoi(const char *str);
+int		should_terminate(t_philos *philos);
 
 #endif

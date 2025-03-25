@@ -6,11 +6,13 @@
 /*   By: gumendes <gumendes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 15:39:55 by gumendes          #+#    #+#             */
-/*   Updated: 2025/03/24 12:25:22 by gumendes         ###   ########.fr       */
+/*   Updated: 2025/03/25 16:49:20 by gumendes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philos.h"
+
+static void	solo_thinker(t_philos *philos);
 
 /**
  * @brief The routine in which the philosophers will
@@ -26,8 +28,7 @@ void	*routine(void *data)
 	philo->last_eat_time = philo->data->start_time;
 	if (philo->data->philo_amount == 1)
 	{
-		print_message(philo, FORK);
-		ft_usleep(philo->data->to_die);
+		solo_thinker(philo);
 		return (NULL);
 	}
 	if (philo->id % 2 != 0)
@@ -35,9 +36,11 @@ void	*routine(void *data)
 		print_message(philo, THINKING);
 		ft_usleep(philo->data->to_eat);
 	}
-	while (philo->data->status == ALIVE)
+	while (philo->philo_stats == ALIVE)
 	{
 		eat(philo);
+		if (philo->data->status != ALIVE)
+			return(NULL);
 		ft_sleep(philo);
 		think(philo);
 	}
@@ -51,29 +54,22 @@ void	*routine(void *data)
  */
 int	status_checker(t_philos *philo)
 {
-	int	i;
-
-	i = 0;
-	if (philo->philo_stats != FULL)
+	if (ft_get_time() - philo->last_eat_time > (size_t)philo->data->to_die
+		&& philo->meals_eaten != philo->data->eat_amount)
 	{
-		if (ft_get_time() - philo->last_eat_time > (size_t)philo->data->to_die)
-		{
-			philo->data->status = DEAD;
-			return (DEAD);
-		}
-		else if (philo->meals_eaten == philo->data->eat_amount && \
-			philo->philo_stats == ALIVE)
-		{
-			philo->data->philos_full++;
-			philo->philo_stats = FULL;
-		}
-		if (philo->data->philos_full == philo->data->philo_amount)
-			philo->data->status = FULL;
-		i = philo->data->status;
+		philo->data->status = DEAD;
+		philo->philo_stats = DEAD;
+		return (DEAD);
 	}
-	else
-		return (i);
-	return (i);
+	else if (philo->meals_eaten == philo->data->eat_amount && \
+	philo->philo_stats != FULL)
+	{
+		philo->data->philos_full++;
+		philo->philo_stats = FULL;
+	}
+	if (philo->data->philos_full == philo->data->philo_amount)
+		philo->data->status = FULL;
+	return (philo->data->status);
 }
 
 /**
@@ -82,17 +78,31 @@ int	status_checker(t_philos *philo)
  */
 void	monitor(t_data *data)
 {
-	int		i;
+	int	i;
 
-	i = 0;
 	while (42)
 	{
-		if (status_checker(&data->philos[i]) != ALIVE)
-			break ;
-		i++;
-		if (i == data->philo_amount)
-			i = 0;
+		i = 0;
+		while (i < data->philo_amount)
+		{
+			if (status_checker(&data->philos[i]) == DEAD)
+			{
+				print_message(&data->philos[i], DIED);
+				data->status = DEAD;
+				return ;
+			}
+			i++;
+		}
+		if (data->status == FULL)
+			return ;
 	}
-	if (data->status == DEAD)
-		died(&data->philos[i]);
+}
+
+/**
+ * @brief Executes the necessary routine when the number of philosophers is 1.
+ */
+static void	solo_thinker(t_philos *philos)
+{
+	print_message(philos, FORK);
+	ft_usleep(philos->data->to_die);
 }

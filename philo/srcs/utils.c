@@ -6,7 +6,7 @@
 /*   By: gumendes <gumendes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 15:26:34 by gumendes          #+#    #+#             */
-/*   Updated: 2025/03/11 11:44:02 by gumendes         ###   ########.fr       */
+/*   Updated: 2025/03/25 14:16:40 by gumendes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,4 +68,12 @@ int	ft_atoi(const char *str)
 		idx++;
 	}
 	return (sign * sum);
+}
+
+int	should_terminate(t_philos *philos)
+{
+	if (philos->data->status != ALIVE || philos->philo_stats != ALIVE
+		|| philos->meals_eaten == philos->data->eat_amount)
+		return (1);
+	return (0);
 }

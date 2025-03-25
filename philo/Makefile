@@ -6,7 +6,7 @@
 #    By: gumendes <gumendes@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/27 12:10:21 by gumendes          #+#    #+#              #
-#    Updated: 2025/03/24 13:52:22 by gumendes         ###   ########.fr        #
+#    Updated: 2025/03/25 14:46:00 by gumendes         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@
 CC			=	cc
 RM			=	rm -rf
 CFLAGS		=	-Wall -Wextra -Werror -pthread -g
-LEAK		=	-fsanitize=thread
+LEAK		=	-fsanitize=leak
 
 #==============================================================================#
 #                                  PATHS       					               #
@@ -67,7 +67,7 @@ $(BUILD_PATH)/%.o: $(SRC_PATH)/%.c
 clean:
 	@if [ -d "$(BUILD_PATH)" ]; \
 		then echo "$(RED)[REMOVED OBJECT FILES]$(END)"; \
-		else echo "$(YEL)[NOTHING TO BE CLEANED]$(END)"; \
+		else echo "$(YEL)[NO OBJECTS TO CLEAN]$(END)"; \
 	fi
 	@$(RM) $(BUILD_PATH)
 

@@ -6,7 +6,7 @@
 /*   By: gumendes <gumendes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:28:06 by gumendes          #+#    #+#             */
-/*   Updated: 2025/03/24 11:27:26 by gumendes         ###   ########.fr       */
+/*   Updated: 2025/03/25 14:47:59 by gumendes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,11 @@ void	print_message(t_philos *philos, char *message)
  */
 void	eat(t_philos *philos)
 {
-	if (philos->data->status != ALIVE || philos->philo_stats != ALIVE
-		|| philos->meals_eaten == philos->data->eat_amount)
+	if (should_terminate(philos))
 		return ;
 	pthread_mutex_lock(philos->right_fork);
 	pthread_mutex_lock(philos->left_fork);
-	if (philos->data->status != ALIVE || philos->philo_stats != ALIVE
-		|| philos->meals_eaten == philos->data->eat_amount)
+	if (should_terminate(philos))
 	{
 		pthread_mutex_unlock(philos->left_fork);
 		pthread_mutex_unlock(philos->right_fork);
@@ -53,7 +51,6 @@ void	eat(t_philos *philos)
 		philos->meals_eaten++;
 	pthread_mutex_unlock(philos->left_fork);
 	pthread_mutex_unlock(philos->right_fork);
-	return ;
 }
 
 /**
@@ -61,12 +58,11 @@ void	eat(t_philos *philos)
  */
 void	ft_sleep(t_philos *philos)
 {
-	if (philos->data->status == DEAD || philos->data->status == FULL)
-		return ;
-	else if (philos->meals_eaten == philos->data->eat_amount)
-		return ;
-	print_message(philos, SLEEPING);
-	ft_usleep(philos->data->to_sleep);
+	if (!should_terminate(philos))
+	{
+		print_message(philos, SLEEPING);
+		ft_usleep(philos->data->to_sleep);
+	}
 }
 
 /**
@@ -74,11 +70,8 @@ void	ft_sleep(t_philos *philos)
  */
 void	think(t_philos *philos)
 {
-	if (philos->data->status == DEAD || philos->data->status == FULL)
-		return ;
-	else if (philos->meals_eaten == philos->data->eat_amount)
-		return ;
-	print_message(philos, THINKING);
+	if (!should_terminate(philos))
+		print_message(philos, THINKING);
 }
 
 /**
