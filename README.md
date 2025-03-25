@@ -1,4 +1,4 @@
-42 Project : philosophers
+[42](https://42.fr/en/homepage/) Project : philosophers
 # <h1 align="center">Philosophers</h1>
 
 # About
