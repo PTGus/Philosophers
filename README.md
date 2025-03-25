@@ -19,7 +19,7 @@ The philosophers alternate between **eating**, **thinking**, or **sleeping**:
 ## **Challenges**  
 - **Resource Sharing**: Only one philosopher can use a fork at a time.  
 - **Deadlock Risk**:  
-    - If each philosopher picks up the fork on their left at the same time, they will all wait indefinitely for the fork on their right, causing a **deadlock**.  
+    - If each philosopher picks up the fork on their left at the same time, they will all wait indefinitely for the fork on their right, causing a **[deadlock](https://www.geeksforgeeks.org/introduction-of-deadlock-in-operating-system/)**.  
 - **Starvation**: Some philosophers may keep eating while others never get a chance, leading to **starvation**.  
 
 ---
