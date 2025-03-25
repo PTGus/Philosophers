@@ -21,6 +21,8 @@ The philosophers alternate between **eating**, **thinking**, or **sleeping**:
 - **Deadlock Risk**:  
     - If each philosopher picks up the fork on their left at the same time, they will all wait indefinitely for the fork on their right, causing a **[deadlock](https://www.geeksforgeeks.org/introduction-of-deadlock-in-operating-system/)**.  
 - **Starvation**: Some philosophers may keep eating while others never get a chance, leading to **starvation**.  
+- **Data Races and Race Conditions**:  
+    - Concurrent access to shared resources (e.g., forks) without proper synchronization may result in **[race conditions](https://www.geeksforgeeks.org/race-condition-vulnerability/)**, where the order of execution affects the program's correctness.  
 
 ---
 
