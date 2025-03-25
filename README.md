@@ -8,7 +8,7 @@ The [Dining Philosophers Problem](https://www.mathworks.com/help/simevents/ug/di
 Imagine one or more philosophers sitting at a round table. In front of each philosopher is a plate of food, and between every pair of philosophers is a single fork. To eat, a philosopher needs to pick up two forks (the one on their left and the one on their right).  
 • The philosophers alternate between eating, thinking, or sleeping:  
 &nbsp;&nbsp;&nbsp;&nbsp;○ While performing an action the philosophers can not perform any other action.  
-&nbsp;&nbsp;&nbsp;&nbsp;○ Eating or thinking may not be interrupted untill the allocated time or the simmulation ends.  
+&nbsp;&nbsp;&nbsp;&nbsp;○ Eating or thinking may not be interrupted untill the allocated time or the simulation ends.  
 
 # Challenges
 • Resource Sharing: Only one philosopher can use a fork at a time.  
